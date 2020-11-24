@@ -152,7 +152,7 @@ You must change the inputDecoration property:
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  code_fields: ^0.0.1
+  code_fields: ^0.0.2
 ```
 
 Install it:

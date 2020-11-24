@@ -1,6 +1,6 @@
 name: code_fields
 description: A package that allows you to create code fields with customization options for Flutter. It can be useful for OTP and other verification methods.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/federicodesia/code_fields
 
 environment:
