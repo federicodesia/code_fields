@@ -14,7 +14,6 @@ class _MyAppState extends State<MyApp> {
   final int codeLength = 4;
 
   String validateCode(String code){
-
     if(code.length < codeLength) return "Please complete the code";
     else{
       bool isNumeric = int.tryParse(code) != null;
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     return null;
   }
 
-  Future<void> onButtonPressed() async {
+  void onButtonPressed() {
     if(formKey.currentState.validate()){
       formKey.currentState.save();
     }

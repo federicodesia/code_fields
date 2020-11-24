@@ -29,7 +29,7 @@ class CodeFields extends StatefulWidget{
   /// The default width is 60px.
   final double fieldWidth;
 
-  /// Height of each TextFormField.}
+  /// Height of each TextFormField.
   /// 
   /// The default width is 60px.
   final double fieldHeight;
@@ -42,7 +42,7 @@ class CodeFields extends StatefulWidget{
   /// Allows you to customize the TextFormField.
   final InputDecoration inputDecoration;
 
-  /// The text style within the TextFormField.
+  /// The text style of the TextFormFields.
   final TextStyle textStyle;
 
   /// The margin between each TextFormField.
@@ -61,12 +61,12 @@ class CodeFields extends StatefulWidget{
 
   /// The callback function that is executed when the entered code changes.
   ///
-  /// Returns a String with the current code, allowing you to create functions or conditions if you wish.
+  /// Returns a String with the current code.
   final Function(String) onChanged;
   
   /// The callback function that is executed when the length of the entered code is complete.
   ///
-  /// Returns a String with the current code, allowing you to create functions or conditions if you wish.
+  /// Returns a String with the current code.
   final Function(String) onCompleted;
 
   /// Option that closes the keyboard when the code is finished entering.

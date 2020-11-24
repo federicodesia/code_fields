@@ -24,7 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   code_fields:
-    path: ../
+    git:
+      url: https://github.com/federicodesia/code_fields.git
+      ref: master
 
 
   # The following adds the Cupertino Icons font to your application.
