@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  code_fields:
+  code_fields: 
     git:
       url: https://github.com/federicodesia/code_fields.git
       ref: master

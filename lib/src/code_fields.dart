@@ -1,9 +1,11 @@
+import 'package:code_fields/src/code_fields_controller.dart';
 import 'package:flutter/material.dart';
 
 class CodeFields extends StatefulWidget {
   const CodeFields(
       {Key key,
       @required this.length,
+      this.controller,
       this.fieldWidth = 60,
       this.fieldHeight = 60,
       this.keyboardType = TextInputType.number,
@@ -22,6 +24,9 @@ class CodeFields extends StatefulWidget {
   ///
   /// It is required and must be greater than two.
   final int length;
+
+  /// Allows you to clear or set a code. Ensure you dispose of it when done.
+  final CodeFieldsController controller;
 
   /// Width of each TextFormField.
   ///
@@ -85,6 +90,7 @@ class CodeFields extends StatefulWidget {
 class _CodeFieldsState extends State<CodeFields> {
   List<TextEditingController> controllers;
   String whitespaceCharacter = "\uFEFF";
+  CodeFieldsController _controller;
 
   String errorText = "";
   void setErrorText(String error) {
@@ -99,6 +105,13 @@ class _CodeFieldsState extends State<CodeFields> {
     for (int i = 1; i < widget.length; i++) {
       controllers[i] = new TextEditingController(text: whitespaceCharacter);
     }
+
+    widget.controller != null ? _controller = widget.controller : _controller = new CodeFieldsController();
+
+    // Set the functions of the controller.
+    _controller.onClearCode(() => clearCode());
+    _controller.onSetCode((int code) => setCode(code));
+
     super.initState();
   }
 
@@ -108,6 +121,25 @@ class _CodeFieldsState extends State<CodeFields> {
         .forEach((TextEditingController controller) => controller.dispose());
 
     super.dispose();
+  }
+
+  void clearCode(){
+    controllers[0].text = "";
+    for (int i = 1; i < widget.length; i++) {
+      controllers[i].text = whitespaceCharacter;
+    }
+  }
+  
+  void setCode(int code){
+    String stringCode = code.toString();
+    if(stringCode.length == widget.length){
+      controllers[0].text = stringCode[0];
+      for (int i = 1; i < widget.length; i++) {
+        controllers[i].text = whitespaceCharacter + stringCode[i];
+      }
+    }else{
+      print("[CodeFields] The length of the code must be ${widget.length}.");
+    }                                                                                                                                                                                                                                       
   }
 
   String getCode() {

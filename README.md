@@ -12,6 +12,7 @@ A package that allows you to create code fields with customization options for F
 
 - Automatically focuses the next field on typing.
 - Automatically focuses the previous field on deletation.
+- Controller to clear or set a code.
 - Option to change the length.
 - Option to change the height and width.
 - Default cursor support.
@@ -54,6 +55,7 @@ Options that allow for more control:
 |  Properties  | Type | Description |
 |--------------|-----------|-------------|
 | `length` | int | Code length. |
+| `controller` | CodeFieldsController | Allows you to clear or set a code. |
 | `fieldWidth`| double | Width of each TextFormField.<br>The default width is 60px.|
 | `fieldHeight`| double | Height of each TextFormField.<br>The default width is 60px.|
 | `keyboardType`| TextInputType | Type of keyboard that shows up.<br>The default keyboard type is `TextInputType.number`.|
@@ -147,12 +149,29 @@ You must change the inputDecoration property:
 
 <br>
 
+## 📌 Using the CodeFieldsController
+
+```dart
+  final CodeFieldsController _controller = new CodeFieldsController();
+```
+
+<br>
+
+|  Functions  | Type | Description |
+|--------------|-----------|-----------|
+| `clearCode()` | void | Clear the code from all TextFields. |
+| `setCode()` |  Function(int code) | Set a code in all TextFields. The length of the code must be equal to that defined in the widget's `length` property. |
+
+<br>
+
+<br>
+
 ## ⚙️ Installation
 
 Add this to your package's pubspec.yaml file:
 ```yaml
 dependencies:
-  code_fields: ^0.0.2
+  code_fields: ^0.0.3
 ```
 
 Install it:

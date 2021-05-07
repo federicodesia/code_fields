@@ -41,10 +41,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: a3e9303121fba7081ba9e75c40edcf7e8efe2573
+      resolved-ref: "368fc5d125eec6b4872b4a28ac0cfbde6c9254ba"
       url: "https://github.com/federicodesia/code_fields.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.2"
   collection:
     dependency: transitive
     description:
