@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class CodeFields extends StatefulWidget {
   const CodeFields(
-      {Key key,
-      @required this.length,
+      {Key? key,
+      required this.length,
       this.controller,
       this.fieldWidth = 60,
       this.fieldHeight = 60,
@@ -26,7 +26,7 @@ class CodeFields extends StatefulWidget {
   final int length;
 
   /// Allows you to clear or set a code. Ensure you dispose of it when done.
-  final CodeFieldsController controller;
+  final CodeFieldsController? controller;
 
   /// Width of each TextFormField.
   ///
@@ -47,7 +47,7 @@ class CodeFields extends StatefulWidget {
   final InputDecoration inputDecoration;
 
   /// The text style of the TextFormFields.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// The margin between each TextFormField.
   ///
@@ -61,17 +61,17 @@ class CodeFields extends StatefulWidget {
   /// Alternating between error and normal status can cause the height of the TextFormField to change.
   ///
   /// To create a field whose height is fixed regardless of whether an error is not displayed set the [helperText] parameter to a space.
-  final FormFieldValidator<String> validator;
+  final FormFieldValidator<String>? validator;
 
   /// The callback function that is executed when the entered code changes.
   ///
   /// Returns a String with the current code.
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
 
   /// The callback function that is executed when the length of the entered code is complete.
   ///
   /// Returns a String with the current code.
-  final Function(String) onCompleted;
+  final Function(String)? onCompleted;
 
   /// Option that closes the keyboard when the code is finished entering.
   ///
@@ -88,9 +88,9 @@ class CodeFields extends StatefulWidget {
 }
 
 class _CodeFieldsState extends State<CodeFields> {
-  List<TextEditingController> controllers;
+  late List<TextEditingController> controllers;
   String whitespaceCharacter = "\uFEFF";
-  CodeFieldsController _controller;
+  CodeFieldsController? _controller;
 
   String errorText = "";
   void setErrorText(String error) {
@@ -99,26 +99,25 @@ class _CodeFieldsState extends State<CodeFields> {
 
   @override
   void initState() {
-    controllers = new List<TextEditingController>(widget.length);
+    controllers = List.filled(widget.length, new TextEditingController());
 
     controllers[0] = new TextEditingController();
     for (int i = 1; i < widget.length; i++) {
       controllers[i] = new TextEditingController(text: whitespaceCharacter);
     }
 
-    widget.controller != null ? _controller = widget.controller : _controller = new CodeFieldsController();
+    _controller = widget.controller ?? new CodeFieldsController();
 
     // Set the functions of the controller.
-    _controller.onClearCode(() => clearCode());
-    _controller.onSetCode((int code) => setCode(code));
+    _controller!.onClearCode(() => clearCode());
+    _controller!.onSetCode((int code) => setCode(code));
 
     super.initState();
   }
 
   @override
   void dispose() {
-    controllers
-        .forEach((TextEditingController controller) => controller.dispose());
+    controllers.forEach((TextEditingController controller) => controller.dispose());
 
     super.dispose();
   }
@@ -172,7 +171,7 @@ class _CodeFieldsState extends State<CodeFields> {
           child: Text(
             errorText,
             textAlign: TextAlign.center,
-            style: themeData.textTheme.caption
+            style: themeData.textTheme.caption!
                 .copyWith(color: themeData.errorColor)
                 .merge(themeData.inputDecorationTheme.errorStyle),
             overflow: TextOverflow.ellipsis,
@@ -223,11 +222,11 @@ class _CodeFieldsState extends State<CodeFields> {
             }
 
             String code = getCode();
-            widget.onChanged(code);
-            if (code.length == widget.length) widget.onCompleted(code);
+            widget.onChanged!(code);
+            if (code.length == widget.length) widget.onCompleted!(code);
           },
-          validator: (String code) {
-            String error = widget.validator.call(getCode());
+          validator: (String? code) {
+            String? error = widget.validator!.call(getCode());
             error != null ? setErrorText(error) : setErrorText("");
             return error;
           },
